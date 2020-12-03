@@ -19,9 +19,17 @@ app.get("/", function (req, res) {
 });
 
 
-// your first API endpoint... 
-app.get("/api/hello", function (req, res) {
-  res.json({greeting: 'hello API'});
+app.get("/api/whoami", function (req, res) {
+  // Use req.header to access HTTP headers values and assign to vaiables
+  const ipAddressRes = req.header('x-forwarded-for');
+  const languageRes = req.header('Accept-Language');
+  const softwareRes = req.header('User-Agent')
+  // Return json response of object containing key: value pairs where values are the HTTP header variables
+  res.json({
+    ipaddress: ipAddressRes,
+    language: languageRes,
+    software: softwareRes
+    });
 });
 
 
